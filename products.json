@@ -1,0 +1,16 @@
+
+[
+  {
+    "productId": "1",
+    "name": "Premium Jasmine Rice",
+    "quantity": 100,
+    "price": 45.00
+  },
+  {
+    "productId": "2",
+    "name": "Brown Rice 5kg",
+    "quantity": 50,
+    "price": 38.50
+  }
+  
+]

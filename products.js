@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const fs = require('fs');
+const path = require('path');
 const filePath = path.join(__dirname, '../products.json');
 
 // Helper to read JSON
@@ -22,7 +23,7 @@ router.get('/', (req, res) => {
 // 🔵 GET product by ID
 router.get('/:id', (req, res) => {
   const products = readProducts();
-  const product = products.find(p => p.productId === req.params.id);
+  const product = products.find(p => p.productID === req.params.id);
   if (product) res.json(product);
   else res.status(404).json({ message: 'Product not found' });
 });
@@ -32,11 +33,14 @@ router.post('/', (req, res) => {
   const products = readProducts();
   const newProduct = req.body;
 
-  if (!newProduct.productId || !newProduct.name || newProduct.quantity == null || newProduct.price == null) {
-    return res.status(400).json({ message: 'All product fields are required' });
+  const requiredFields = ['productID', 'productName', 'productType', 'price', 'stock', 'imageURL', 'description'];
+  for (let field of requiredFields) {
+    if (newProduct[field] == null || newProduct[field] === '') {
+      return res.status(400).json({ message: `Field ${field} is required` });
+    }
   }
 
-  if (products.find(p => p.productId === newProduct.productId)) {
+  if (products.find(p => p.productID === newProduct.productID)) {
     return res.status(400).json({ message: 'Product ID already exists' });
   }
 
@@ -48,7 +52,7 @@ router.post('/', (req, res) => {
 // 🟠 UPDATE a product
 router.put('/:id', (req, res) => {
   const products = readProducts();
-  const index = products.findIndex(p => p.productId === req.params.id);
+  const index = products.findIndex(p => p.productID === req.params.id);
 
   if (index === -1) return res.status(404).json({ message: 'Product not found' });
 
@@ -61,7 +65,7 @@ router.put('/:id', (req, res) => {
 // 🔴 DELETE a product
 router.delete('/:id', (req, res) => {
   let products = readProducts();
-  const index = products.findIndex(p => p.productId === req.params.id);
+  const index = products.findIndex(p => p.productID === req.params.id);
 
   if (index === -1) return res.status(404).json({ message: 'Product not found' });
 

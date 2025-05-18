@@ -1,16 +1,20 @@
-
 [
   {
-    "productId": "1",
-    "name": "Premium Jasmine Rice",
-    "quantity": 100,
-    "price": 45.00
+    "productID": "1",
+    "productName": "Premium Jasmine Rice",
+    "productType": "White Rice",
+    "price": 45.00,
+    "stock": 100,
+    "imageURL": "https://example.com/images/jasmine.jpg",
+    "description": "High quality jasmine rice with a fragrant aroma."
   },
   {
-    "productId": "2",
-    "name": "Brown Rice 5kg",
-    "quantity": 50,
-    "price": 38.50
+    "productID": "2",
+    "productName": "Brown Rice 5kg",
+    "productType": "Brown Rice",
+    "price": 38.50,
+    "stock": 50,
+    "imageURL": "https://example.com/images/brown.jpg",
+    "description": "Nutritious whole grain brown rice."
   }
-  
 ]
